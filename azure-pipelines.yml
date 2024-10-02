@@ -14,6 +14,30 @@ variables:
   imageName: 'my-flask-app>' # Docker image name (e.g., my-flask-app)
 
 steps:
+
+- task: AzureCLI@2
+  displayName: 'Install Terraform'
+  inputs:
+    azureSubscription: $(azureSubscription)
+    scriptType: 'bash'
+    scriptLocation: 'inlineScript'
+    inlineScript: |
+      curl -LO https://raw.githubusercontent.com/terraform-linters/tflint/master/install.sh
+      chmod +x install.sh
+      ./install.sh
+
+- task: AzureCLI@2
+  displayName: 'Provision Infrastructure with Terraform'
+  inputs:
+    azureSubscription: $(azureSubscription)
+    scriptType: 'bash'
+    scriptLocation: 'inlineScript'
+    inlineScript: |
+      echo "Initializing Terraform..."
+      terraform init
+      echo "Applying Terraform configuration..."
+      terraform apply -auto-approve 
+
 - task: Docker@2
   displayName: 'Build Docker Image'
   inputs:
@@ -32,5 +56,12 @@ steps:
     scriptLocation: 'inlineScript'
     inlineScript: |
       echo "Deploying to AKS..."
+      az aks get-credentials --resource-group $(resourceGroup) --name $(aksCluster)
       kubectl apply -f deployment.yaml
       kubectl apply -f service.yaml
+
+- script: |
+    echo "Verifying deployment..."
+    kubectl get pods
+    kubectl get services
+  displayName: 'Verify Deployment'
