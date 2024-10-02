@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - DevOps Project</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4; /* Light background for contrast */
+            color: #333; /* Dark text for readability */
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #333; /* Dark header */
+            padding: 10px 0;
+            text-align: center;
+        }
+        header h1 {
+           margin: 0;
+           color:white;
+       }
+       nav {
+           margin-top: 10px;
+       }
+       nav a {
+           color:white;
+           margin: 0 15px;
+           text-decoration:none;
+           font-weight:bold;
+       }
+       nav a:hover {
+           text-decoration:none;
+       }
+       .container {
+           padding:50px;
+           text-align:center;
+       }
+       h2 {
+           color:#ff7e5f; /* Match header gradient colors */
+       }
+       footer {
+           margin-top:auto;
+           padding-top :20px ;
+           padding-bottom :20px ;
+           background-color:#222 ;
+           color:white ;
+           text-align:center ;
+       }
+   </style>
+</head>
+<body>
+
+<header>
+   <h1>About Us</h1>
+   <nav>
+       <a href="/">Home</a>
+       <a href="/about">About</a> <!-- Highlight active page -->
+   </nav>
+</header>
+
+<div class="container">
+   <h2>About This Project</h2>
+   <p>This project showcases an end-to-end DevOps pipeline using various tools and technologies.</p>
+
+   <h3>Features:</h3>
+   <ul style="list-style-type:none;">
+       <li><i class="fas fa-check-circle"></i> Infrastructure as Code with Terraform</li>
+       <li><i class="fas fa-check-circle"></i> Configuration Management with Ansible</li>
+       <li><i class="fas fa-check-circle"></i> Containerization with Docker</li>
+       <li><i class="fas fa-check-circle"></i> Orchestration using Kubernetes (AKS)</li>
+       <li><i class="fas fa-check-circle"></i> CI/CD using Azure DevOps</li>
+   </ul>
+
+   <p><a href="/" class="button">Back to Home</a></p>
+
+</div>
+
+<footer>
+   <p>&copy; {{ year }} Satya-DevOps-Project | Contact us at info@DevOps.com</p> <!-- Footer -->
+</footer>
+
+</body>
+</html>
