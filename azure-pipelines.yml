@@ -7,17 +7,18 @@ pool:
   vmImage: 'ubuntu-latest'
 
 variables:
-  azureSubscription: '<your-azure-subscription>' # Name of the Azure subscription service connection
-  resourceGroup: '<your-resource-group>' # Resource group name
-  aksCluster: '<your-aks-cluster-name>' # AKS cluster name
-  imageName: '<your-docker-image-name>' # Docker image name (e.g., my-flask-app)
+  azureSubscription: 'devops-project-connection'
+  azureSubscription-dockerhub: 'dockerhub' # Name of the Azure subscription service connection
+  resourceGroup: 'app-grp' # Resource group name
+  aksCluster: 'devops-cluster' # AKS cluster name
+  imageName: 'my-flask-app>' # Docker image name (e.g., my-flask-app)
 
 steps:
 - task: Docker@2
   displayName: 'Build Docker Image'
   inputs:
     command: buildAndPush
-    containerRegistry: $(azureSubscription) # Use the service connection for Docker registry
+    containerRegistry: $(azureSubscription-dockerhub) # Use the service connection for Docker registry
     repository: $(imageName)
     dockerfile: '**/Dockerfile' # Path to your Dockerfile
     tags: |
