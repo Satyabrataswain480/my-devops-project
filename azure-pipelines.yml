@@ -1,0 +1,35 @@
+trigger:
+  branches:
+    include:
+      - main # Change this to your default branch
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  azureSubscription: '<your-azure-subscription>' # Name of the Azure subscription service connection
+  resourceGroup: '<your-resource-group>' # Resource group name
+  aksCluster: '<your-aks-cluster-name>' # AKS cluster name
+  imageName: '<your-docker-image-name>' # Docker image name (e.g., my-flask-app)
+
+steps:
+- task: Docker@2
+  displayName: 'Build Docker Image'
+  inputs:
+    command: buildAndPush
+    containerRegistry: $(azureSubscription) # Use the service connection for Docker registry
+    repository: $(imageName)
+    dockerfile: '**/Dockerfile' # Path to your Dockerfile
+    tags: |
+      $(Build.BuildId)
+
+- task: AzureCLI@2
+  displayName: 'Deploy to AKS'
+  inputs:
+    azureSubscription: $(azureSubscription)
+    scriptType: 'bash'
+    scriptLocation: 'inlineScript'
+    inlineScript: |
+      echo "Deploying to AKS..."
+      kubectl apply -f deployment.yaml
+      kubectl apply -f service.yaml
