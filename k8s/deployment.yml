@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: flask-app
-        image: satyabrataswain/mypython-devops-project:v1 # Replace with your Docker image name if different
+        image: satyabrataswain/mypython-devops-project:latest # Replace with your Docker image name if different
         ports:
         - containerPort: 8000

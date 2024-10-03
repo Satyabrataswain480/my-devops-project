@@ -6,8 +6,8 @@ docker push satyabrataswain/mypython-devops-project:v1
 
 
 
-kubectl apply -f deployment.yml
-kubectl apply -f service.yml
+kubectl apply -f k8s/deployment.yml
+kubectl apply -f k8s/service.yml
 
 minikube service flask-app-service --url
 
